@@ -1,2 +1,1 @@
-const deluminate = url => null
-export default deluminate
+export const deluminate = url => console.log('deluminate', url)
