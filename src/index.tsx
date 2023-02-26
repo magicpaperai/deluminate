@@ -25,6 +25,16 @@ function readDomain(url) {
   return obj.hostname
 }
 
+function Icon({src, title}) {
+  const [ready, setReady] = React.useState(false)
+  React.useEffect(() => {
+    const img = new Image()
+    img.onload = () => setReady(true)
+    img.src = src
+  }, [src])
+  return ready ? <img src={src} /> : <span className={styles.icon}>{title?.[0]}</span>
+}
+
 export function Card({url, compact = false}) {
   const [metadata, setMetadata] = React.useState(null)
   React.useEffect(() => {
@@ -42,6 +52,7 @@ export function Card({url, compact = false}) {
       </div>
     )
   }
+  const title = metadata.open_graph?.title || metadata.title
   return (
     <a href={url}>
       <div className={styles.card}>
@@ -52,9 +63,9 @@ export function Card({url, compact = false}) {
           <p>{metadata.open_graph?.description}</p>
         </section>}
         <header>
-          {metadata.favicon && <img src={metadata.favicon} />}
+          {metadata.favicon && <Icon src={metadata.favicon} title={title} />}
           <hgroup>
-            <h2>{metadata.open_graph?.title || metadata.title}</h2>
+            <h2>{title}</h2>
             <h3>{readDomain(metadata.open_graph?.url || url)}</h3>
           </hgroup>
         </header>
