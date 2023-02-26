@@ -1,14 +1,15 @@
 {
   "name": "deluminate",
   "author": "Matt Neary <neary.matt@gmail.com>",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "quickly pull webpage metadata",
   "homepage": "https://github.com/magicpaperai/deluminate",
   "license": "GPLV3",
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "watch": "webpack -w --config webpack.dev.js"
+    "watch": "webpack -w --config webpack.dev.js",
+    "serve": "node server.js"
   },
   "dependencies": {
     "classnames": "^2.3.2",
