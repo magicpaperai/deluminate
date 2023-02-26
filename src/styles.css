@@ -11,9 +11,13 @@ a {
   overflow: hidden;
   border-radius: 8px;
   font-family: "Helvetica Neue", "Helvetica", sans-serif;
+  background: white;
   color: #434343;
   &:hover {
     background-color: #f0f0f0;
+  }
+  header, section {
+    background: white;
   }
   header {
     padding: 5px 7px;

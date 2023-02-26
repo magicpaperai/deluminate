@@ -15,6 +15,10 @@ module.exports = {
     globalObject: 'this',
     libraryTarget: "umd"
   },
+  externals: {
+    react: 'react',
+    'react-dom': 'react-dom',
+  },
   module: {
     rules: [
       {
