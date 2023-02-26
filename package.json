@@ -1,9 +1,9 @@
 {
-  "name": "deluminator",
+  "name": "deluminate",
   "author": "Matt Neary <neary.matt@gmail.com>",
   "version": "0.0.0",
   "description": "quickly pull webpage metadata",
-  "homepage": "https://github.com/magicpaperai/deluminator",
+  "homepage": "https://github.com/magicpaperai/deluminate",
   "license": "GPLV3",
   "main": "dist/index.js",
   "scripts": {

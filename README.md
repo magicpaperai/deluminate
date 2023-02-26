@@ -1,1 +1,1 @@
-# deluminator
+# deluminate
