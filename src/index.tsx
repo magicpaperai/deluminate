@@ -38,6 +38,7 @@ function Icon({src, title}) {
 
 export function Card({url, compact = false}) {
   const [metadata, setMetadata] = React.useState(null)
+  const [collapsed, setCollapsed] = React.useState(compact)
   React.useEffect(() => {
     load(url).then(md => setMetadata(md))
   }, [url])
@@ -57,12 +58,17 @@ export function Card({url, compact = false}) {
   }
   const title = metadata.open_graph?.title || metadata.title
   return (
-    <a href={url}>
+    <a href={url} onClick={evt => {
+      if (compact && collapsed) {
+        evt.preventDefault()
+        setCollapsed(false)
+      }
+    }}>
       <div className={styles.card}>
-        {!compact && !_.isEmpty(metadata.open_graph?.images) && <section>
+        {!collapsed && !_.isEmpty(metadata.open_graph?.images) && <section>
           {metadata.open_graph?.images?.map(img => <img src={img.url} />)}
         </section>}
-        {!compact && metadata.open_graph?.description && <section className={styles.description}>
+        {!collapsed && metadata.open_graph?.description && <section className={styles.description}>
           <p>{metadata.open_graph?.description}</p>
         </section>}
         <header>
