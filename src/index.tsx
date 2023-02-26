@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import cx from 'classnames'
 import styles from './styles.css'
+import LoaderImg from './oval.svg'
 
 function load(url) {
   return fetch('/scrape', {
@@ -42,14 +43,16 @@ export function Card({url, compact = false}) {
   }, [url])
   if (_.isNil(metadata)) {
     return (
-      <div className={cx(styles.card, styles.loading)}>
-        <header>
-          <img src="/static/oval.svg" />
-          <hgroup>
-            <h2>Loading...</h2>
-          </hgroup>
-        </header>
-      </div>
+      <a href="#">
+        <div className={cx(styles.card, styles.loading)}>
+          <header>
+            <LoaderImg viewBox="0 0 38 38" />
+            <hgroup>
+              <h2>Loading...</h2>
+            </hgroup>
+          </header>
+        </div>
+      </a>
     )
   }
   const title = metadata.open_graph?.title || metadata.title

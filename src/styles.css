@@ -29,6 +29,10 @@ a {
     img {
       width: 24px;
     }
+    svg {
+      width: 24px;
+      height: 24px;
+    }
     hgroup {
       flex: 1;
       overflow: hidden;

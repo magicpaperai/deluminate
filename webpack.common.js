@@ -23,6 +23,10 @@ module.exports = {
         use: "ts-loader"
       },
       {
+        test: /\.svg$/,
+        loader: '@svgr/webpack'
+      },
+      {
         test: /\.css$/,
         use: [
           "style-loader",
