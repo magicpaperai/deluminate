@@ -1,38 +1,29 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>deluminator</title>
-    <meta charset="utf-8" />
-    <script type="text/javascript" src="../dist/index.js"></script>
-    <style>
-      body {
-        max-width: 500px;
-        margin: auto;
-      }
-      .highlight {
-        background: yellow;
-      }
-      .headline {
-        margin-top: 25px;
-        display: flex;
-        align-items: center;
-      }
-      .headline h1 {
-        flex: 1;
-        margin: 0;
-      }
-      .byline {
-        color: #777;
-      }
-      .signpost {
-        display: none;
-      }
-    </style>
+    <title>delimunator</title>
   </head>
   <body>
     <h1>deluminator</h1>
     <script type="text/javascript">
-      deluminator.deluminate('http://mattneary.com')
+      function load(url) {
+        return fetch('/scrape', {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          referrerPolicy: 'no-referrer',
+          body: JSON.stringify({url})
+        }).then(async data => {
+          const body = await data.json()
+          console.log(body)
+          return body
+        })
+      }
+      load('https://github.com/magicpaperai/deluminator').then(x => console.log(x))
+      load('https://twitter.com/simonbchen/status/1617693408340086784').then(x => console.log(x))
     </script>
   </body>
 </html>
