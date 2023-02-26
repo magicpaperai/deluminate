@@ -4,10 +4,13 @@ const {version} = require('./package.json');
 
 module.exports = {
   context: __dirname,
-  entry: "./src/index.ts",
+  entry: {
+    index: './src/index.tsx',
+    bootstrap: './src/bootstrap.tsx',
+  },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "index.js",
+    filename: "[name].js",
     library: "deluminator",
     globalObject: 'this',
     libraryTarget: "umd"
@@ -18,12 +21,28 @@ module.exports = {
         exclude: /node_modules/,
         test: /\.tsx?$/,
         use: "ts-loader"
-      }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,
+            },
+          },
+          {
+            loader: "sass-loader" // Compiles Sass to CSS
+          }
+        ],
+      },
     ]
   },
   mode: 'production',
   resolve: {
-    extensions: [".js", ".ts"]
+    extensions: [".js", ".ts", ".tsx"]
   },
 };
 

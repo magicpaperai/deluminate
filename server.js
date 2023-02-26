@@ -12,11 +12,16 @@ app.use(
 app.use(express.json())
 app.use(express.static('.'))
 
+const cache = {}
+
 app.post('/scrape', async (req, res) => {
   const url = req.body.url
   console.log(url)
-  const result = await unfurl.unfurl(url)
-  res.send(result)
+  if (!cache[url]) {
+    const result = await unfurl.unfurl(url)
+    cache[url] = result
+  }
+  res.send(cache[url])
 })
 
 const port = 8080

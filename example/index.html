@@ -4,26 +4,6 @@
     <title>delimunator</title>
   </head>
   <body>
-    <h1>deluminator</h1>
-    <script type="text/javascript">
-      function load(url) {
-        return fetch('/scrape', {
-          method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          referrerPolicy: 'no-referrer',
-          body: JSON.stringify({url})
-        }).then(async data => {
-          const body = await data.json()
-          console.log(body)
-          return body
-        })
-      }
-      load('https://github.com/magicpaperai/deluminator').then(x => console.log(x))
-      load('https://twitter.com/simonbchen/status/1617693408340086784').then(x => console.log(x))
-    </script>
+    <script type="text/javascript" src="/dist/bootstrap.js"></script>
   </body>
 </html>
