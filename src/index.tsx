@@ -21,6 +21,23 @@ function load(url) {
   })
 }
 
+function read(url) {
+  return fetch('/read', {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify({url})
+  }).then(async data => {
+    const body = await data.json()
+    console.log(body)
+    return body
+  })
+}
+
 function readDomain(url) {
   const obj = new URL(url)
   return obj.hostname
@@ -80,5 +97,28 @@ export function Card({url, compact = false}) {
         </header>
       </div>
     </a>
+  )
+}
+
+export function Document({url}) {
+  const [metadata, setMetadata] = React.useState(null)
+  React.useEffect(() => {
+    read(url).then(md => setMetadata(md))
+  }, [url])
+  if (_.isNil(metadata)) {
+    return (
+      <div className={styles.page}>
+        <h1>Loading...</h1>
+        <div className={cx(styles.body, styles.loading)}>
+          <LoaderImg viewBox="0 0 38 38" />
+        </div>
+      </div>
+    )
+  }
+  return (
+    <div className={styles.page}>
+      <h1>{metadata?.title}</h1>
+      {metadata?.content && <div className={styles.body} dangerouslySetInnerHTML={{__html: metadata.content}} />}
+    </div>
   )
 }
