@@ -53,7 +53,7 @@ function Icon({src, title}) {
   return ready ? <img src={src} /> : <span className={styles.icon}>{title?.[0]}</span>
 }
 
-export function Card({url, compact = false}) {
+export function Card({url, compact = false, onClick = null}) {
   const [metadata, setMetadata] = React.useState(null)
   const [collapsed, setCollapsed] = React.useState(compact)
   React.useEffect(() => {
@@ -79,6 +79,9 @@ export function Card({url, compact = false}) {
       if (compact && collapsed) {
         evt.preventDefault()
         setCollapsed(false)
+      } else if (onClick) {
+        evt.preventDefault()
+        onClick()
       }
     }}>
       <div className={styles.card}>
