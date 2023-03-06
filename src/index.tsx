@@ -53,15 +53,16 @@ function Icon({src, title}) {
   return ready ? <img src={src} /> : <span className={styles.icon}>{title?.[0]}</span>
 }
 
-export function Card({url, compact = false, onClick = null}) {
+export function Card({url, compact = false, onClick = null, grow = false}) {
   const [metadata, setMetadata] = React.useState(null)
-  const [collapsed, setCollapsed] = React.useState(compact)
+  const [_collapsed, setCollapsed] = React.useState(true)
+  const collapsed = compact ? _collapsed : false
   React.useEffect(() => {
     load(url).then(md => setMetadata(md))
   }, [url])
   if (_.isNil(metadata)) {
     return (
-      <a href="#">
+      <a href="#" className={cx(grow && styles.grow)}>
         <div className={cx(styles.card, styles.loading)}>
           <header>
             <LoaderImg viewBox="0 0 38 38" />
