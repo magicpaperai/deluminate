@@ -46,11 +46,33 @@ function readDomain(url) {
 function Icon({src, title}) {
   const [ready, setReady] = React.useState(false)
   React.useEffect(() => {
+    if (!src) return
     const img = new Image()
     img.onload = () => setReady(true)
     img.src = src
   }, [src])
   return ready ? <img src={src} /> : <span className={styles.icon}>{title?.[0]}</span>
+}
+
+export function SimpleCard({title, subtitle, description = null, compact = false, onClick = null, grow = false}) {
+  const [_collapsed, setCollapsed] = React.useState(true)
+  const collapsed = compact ? _collapsed : false
+  return (
+    <a href="#" className={cx(grow && styles.grow)}>
+      <div className={cx(styles.card, styles.loading)}>
+        {!collapsed && description && <section className={styles.description}>
+          <p>{description}</p>
+        </section>}
+        <header>
+          <Icon src={null} title="★" />
+          <hgroup>
+            <h2>{title}</h2>
+            <h3>{subtitle}</h3>
+          </hgroup>
+        </header>
+      </div>
+    </a>
+  )
 }
 
 export function Card({url, compact = false, onClick = null, grow = false}) {
@@ -97,7 +119,7 @@ export function Card({url, compact = false, onClick = null, grow = false}) {
           <p>{metadata.open_graph?.description}</p>
         </section>}
         <header>
-          {metadata.favicon && <Icon src={metadata.favicon} title={title} />}
+          <Icon src={metadata.favicon} title={title} />
           <hgroup>
             <h2>{title}</h2>
             <h3>{readDomain(metadata.open_graph?.url || url)}</h3>

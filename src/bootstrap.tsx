@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Card, Document} from './index'
+import {SimpleCard, Card, Document} from './index'
 import styles from './styles.css'
 
 function App() {
   return (
     <div className={styles.wrapper}>
+      <SimpleCard title='New Chapter' subtitle='Document' />
       <Card url="https://github.com/magicpaperai/deluminate" />
       <Card url="https://twitter.com/simonbchen/status/1617693408340086784" />
       <Card url="https://twitter.com/simonbchen/status/1617693408340086784" compact />
