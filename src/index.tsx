@@ -76,15 +76,19 @@ export function Card({url, compact = false, onClick = null, grow = false}) {
   }
   const title = metadata.open_graph?.title || metadata.title
   return (
-    <a href={url} onClick={evt => {
-      if (compact && collapsed) {
-        evt.preventDefault()
-        setCollapsed(false)
-      } else if (onClick) {
-        evt.preventDefault()
-        onClick()
-      }
-    }}>
+    <a
+      href={url}
+      onClick={evt => {
+        if (compact && collapsed) {
+          evt.preventDefault()
+          setCollapsed(false)
+        } else if (onClick) {
+          evt.preventDefault()
+          onClick()
+        }
+      }}
+      className={cx(grow && styles.grow)}
+    >
       <div className={styles.card}>
         {!collapsed && !_.isEmpty(metadata.open_graph?.images) && <section>
           {metadata.open_graph?.images?.map(img => <img src={img.url} />)}

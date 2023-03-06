@@ -1,8 +1,8 @@
+.grow {
+  width: 100%;
+}
 a {
   width: 300px;
-  &.grow {
-    width: 100%;
-  }
   display: block;
   text-decoration: none;
   outline: none;
